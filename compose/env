@@ -1,0 +1,4 @@
+SELENIUM_HOST=selenium-hub
+SELENIUM_PORT=4444
+CHROME=chrome
+FIREFOX=firefox
