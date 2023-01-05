@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - 4444:4444
+
+  chrome:
+    image: selenium/node-chrome
+    links:
+      - selenium-hub:hub
+    environment:
+       HUB_PORT_4444_TCP_ADDR: selenium-hub
+       HUB_PORT_4444_TCP_PORT: 4444
+    volumes:
+      - /dev/shm:/dev/shm
+
+  firefox:
+    image: selenium/node-firefox
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium-hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    links:
+      - selenium-hub:hub
+
+  scraping:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    image: scraping
+    volumes:
+      - ./:/code
+    env_file:
+      - ./compose/env
+    ports:
+      - 80:80
+    depends_on:
+      - selenium-hub
