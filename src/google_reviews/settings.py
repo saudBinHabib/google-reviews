@@ -5,10 +5,10 @@
 #
 
 
-BOT_NAME = 'scraping'
+BOT_NAME = 'google_reviews'
 
-SPIDER_MODULES = ['scraping.spiders']
-NEWSPIDER_MODULE = 'scraping.spiders'
+SPIDER_MODULES = ['google_reviews.spiders']
+NEWSPIDER_MODULE = 'google_reviews.spiders'
 
 
 # Obey robots.txt rules

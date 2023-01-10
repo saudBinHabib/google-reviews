@@ -2,39 +2,27 @@ version: '3'
 
 services:
 
-  selenium-hub:
-    image: selenium/hub
+  arango:
+    container_name: arango
+    image: arangodb/arangodb:3.7.2
+    restart: always
     ports:
-      - 4444:4444
-
-  chrome:
-    image: selenium/node-chrome
-    links:
-      - selenium-hub:hub
+      - 8529:8529
     environment:
-       HUB_PORT_4444_TCP_ADDR: selenium-hub
-       HUB_PORT_4444_TCP_PORT: 4444
+      - ARANGO_ROOT_PASSWORD=openSesame
     volumes:
-      - /dev/shm:/dev/shm
+      - ~/arangodb:/var/lib/arangodb3
 
-  firefox:
-    image: selenium/node-firefox
-    environment:
-      HUB_PORT_4444_TCP_ADDR: selenium-hub
-      HUB_PORT_4444_TCP_PORT: 4444
-    links:
-      - selenium-hub:hub
-
-  scraping:
+  google-reviews:
     build:
       context: .
       dockerfile: ./compose/Dockerfile
-    image: scraping
+    image: google-reviews
     volumes:
       - ./:/code
     env_file:
       - ./compose/env
     ports:
       - 80:80
-    depends_on:
-      - selenium-hub
+    links:
+      - arango

@@ -1,5 +1,6 @@
+import sys
 
-from scraping.models.reviews import Review
+from google_reviews.models.reviews import Review
 
 
 def process_data(text: str) -> list:
@@ -16,10 +17,11 @@ def process_data(text: str) -> list:
     data = [d.replace(']', '').replace('[', '').replace(',null', '').split(',') for d in data]
     return data
 
-def process_reviews(content: list) -> Review:
+def process_reviews(content: list, company_name: str) -> Review:
     """
 
     :param content:
+    :param company_name:
     :return:
     """
     """
@@ -58,11 +60,14 @@ def process_reviews(content: list) -> Review:
             index += 1
             if not (content[index].startswith(' ') or content[index].startswith('\n')):
                 break
+    reply_content = reply_content if reply else ''
     review_link = [a for a in content if 'https://www.google.com/maps/reviews/data=' in a]
     review_link = review_link[0] if review_link else None
     review = Review(
-        reviewer_name, review_time_information, review_text, rating, reply,
-        reply_content, review_link
+        company_name,
+        reviewer_name, review_time_information,
+        review_text,rating,
+        reply, reply_content, review_link
     )
     return review
 

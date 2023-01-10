@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 here = Path(__file__).parent
 
-init = here / 'src' / 'scraping' / '__init__.py'
+init = here / 'src' / 'google_reviews' / '__init__.py'
 
 with init.open(mode='rt', encoding='utf-8') as fp:
     txt = fp.read()
@@ -29,9 +29,9 @@ except IndexError:
     raise RuntimeError('requirements/dev.txt is broken')
 
 setup(
-    name='scraping',
+    name='google_reviews',
     version=version,
-    install_requires=install_requires,
+    # install_requires=install_requires,
     include_package_data=True,
     package_data={
         '': ['*.json'],
@@ -40,7 +40,9 @@ setup(
     package_dir={'': 'src'},
     entry_points={
         'console_scripts': [
-            'crawl = scraping.entrypoints.crawl:entrypoint',
+            'google_reviews_version  = google_reviews.entrypoints.version:entrypoint',
+            'crawl = google_reviews.entrypoints.crawl:entrypoint',
+
         ],
     },
 )

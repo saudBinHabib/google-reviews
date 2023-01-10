@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class Review:
+    company_name: str = field()
     reviewer_name: str = field()
     review_time: str = field()
     review: str = field(compare=False, hash=False)
