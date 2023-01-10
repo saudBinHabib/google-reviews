@@ -26,7 +26,9 @@ But one feature, which I has implemented, is that if there are multiple companie
 with the same name, it will automatically take the first company and get it's reviews.
 
 you can see the scraped reviews, in `ArangoDB`. you can access it on 
+
 `http://localhost:8529/`
+
 username and password can be found in `env` file inside `compose` directory.
 and the database is `google-reviews`.
 
@@ -47,9 +49,13 @@ You can perform the ETL task, by `Extracting` raw review content.
 you can just simply use the following command.
 
 `python -m virtualenv  .venv`
+
 `source .venv\bin\activate`
+
 `pip install notebook`
+
 `cd notebooks`
+
 `jupyter notebook`
 
 it will load the jupyter notebook, you can test the ETL pipeline there.
