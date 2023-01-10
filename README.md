@@ -15,3 +15,10 @@ point `crawl`, used like following:
 
 `$ docker-compose run scraping crawl --company_name=aspira`
 
+
+
+Note: kindly check the master branch, because this package needs selenium-wire not selenium-hub for getting the requests.
+
+you can use the following command.
+
+``git checkout master``
