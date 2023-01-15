@@ -1,4 +1,4 @@
-import os
+from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
 from seleniumwire import webdriver
@@ -7,16 +7,12 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-class SeleniumSpider():
+class SeleniumSpider(ABC):
     driver = None
 
+    @abstractmethod
     def parse(self):
-        """
-
-        :param response:
-        :return:
-        """
-        raise NotImplementedError()
+        pass
 
 
 @contextmanager
